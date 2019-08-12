@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yatzy", "Yatzy\Yatzy.csproj", "{59DD7D8D-DD00-4A81-9FA9-9B744006A3AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YatzyLibrary", "YatzyLibrary\YatzyLibrary.csproj", "{B7AFD6DB-2EBE-4B8E-B970-A576947906B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YatzyTests", "YatzyTests\YatzyTests.csproj", "{E7835484-8357-4E76-B72E-85376E289564}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59DD7D8D-DD00-4A81-9FA9-9B744006A3AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59DD7D8D-DD00-4A81-9FA9-9B744006A3AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59DD7D8D-DD00-4A81-9FA9-9B744006A3AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59DD7D8D-DD00-4A81-9FA9-9B744006A3AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7AFD6DB-2EBE-4B8E-B970-A576947906B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7AFD6DB-2EBE-4B8E-B970-A576947906B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7AFD6DB-2EBE-4B8E-B970-A576947906B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7AFD6DB-2EBE-4B8E-B970-A576947906B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7835484-8357-4E76-B72E-85376E289564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7835484-8357-4E76-B72E-85376E289564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7835484-8357-4E76-B72E-85376E289564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7835484-8357-4E76-B72E-85376E289564}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
