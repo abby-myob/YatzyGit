@@ -125,6 +125,16 @@ namespace YatzyTests
 
             Assert.Equal(expected, score.NumberOfAKind(dice,4));
         }
+        
+        [Theory]
+        [InlineData(new[] {1,2,3,4,5}, 15)] 
+        [InlineData(new[] {3,3,3,3,1}, 0)]
+        public void return_score_for_small_straight(int[] dice, int expected)
+        {
+            Score score = new Score();
+
+            Assert.Equal(expected, score.SmallStraight(dice);
+        }
     }
 
     public class Score
@@ -176,6 +186,11 @@ namespace YatzyTests
                 }
             } 
             return 0;
+        }
+
+        public int SmallStraight(int[] dice)
+        {
+            throw new NotImplementedException();
         }
     }
 }
