@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Xunit;
 using YatzyLibrary;
@@ -42,9 +40,9 @@ namespace YatzyTests
         [InlineData(new[] {5, 1, 5, 7, 1}, 19)]
         public void Return_score_for_chance(int[] dice, int expected)
         {
-            Score score = new Score();
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, score.Chance(dice));
+            Assert.Equal(expected, categoryLogic.Chance(dice));
         }
 
 
@@ -56,9 +54,9 @@ namespace YatzyTests
         [InlineData(new[] {5, 5, 5, 5, 5}, 50)]
         public void Return_score_for_Same_Number(int[] dice, int expected)
         {
-            Score score = new Score();
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, score.SameNumber(dice));
+            Assert.Equal(expected, categoryLogic.SameNumber(dice));
         }
 
         [Theory]
@@ -74,9 +72,9 @@ namespace YatzyTests
         [InlineData(new[] {5, 5, 5, 3, 5}, 1, 0)]
         public void Return_score_for_Ones(int[] dice, int num, int expected)
         {
-            Score score = new Score();
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, score.SumNumber(dice, num));
+            Assert.Equal(expected, categoryLogic.SumNumber(dice, num));
         }
 
         [Theory]
@@ -86,9 +84,9 @@ namespace YatzyTests
         [InlineData(new[] {3, 3, 3, 3, 1}, 6)]
         public void Return_score_for_Pair(int[] dice, int expected)
         {
-            Score score = new Score();
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, score.NumberOfAKind(dice, 2));
+            Assert.Equal(expected, categoryLogic.NumberOfAKind(dice, 2));
         }
 
         [Theory]
@@ -97,11 +95,11 @@ namespace YatzyTests
         [InlineData(new[] {1, 1, 2, 2, 2}, 6)]
         public void Return_score_for_Two_Pair(int[] dice, int expected)
         {
-            Score score = new Score();
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, score.TwoPair(dice));
+            Assert.Equal(expected, categoryLogic.TwoPair(dice));
         }
-        
+
         [Theory]
         [InlineData(new[] {1, 1, 3, 3, 3}, 9)]
         [InlineData(new[] {1, 1, 2, 3, 4}, 0)]
@@ -109,96 +107,44 @@ namespace YatzyTests
         [InlineData(new[] {1, 2, 2, 2, 2}, 6)]
         public void Return_score_for_3ofAKind(int[] dice, int expected)
         {
-            Score score = new Score();
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, score.NumberOfAKind(dice,3));
+            Assert.Equal(expected, categoryLogic.NumberOfAKind(dice, 3));
         }
-        
+
         [Theory]
-        [InlineData(new[] {2,2,2,2,5}, 8)]
-        [InlineData(new[] {6,6,6,6,6}, 24)]
-        [InlineData(new[] {3,3,4,5,6}, 0)]
-        [InlineData(new[] {3,3,3,3,1}, 12)]
+        [InlineData(new[] {2, 2, 2, 2, 5}, 8)]
+        [InlineData(new[] {6, 6, 6, 6, 6}, 24)]
+        [InlineData(new[] {3, 3, 4, 5, 6}, 0)]
+        [InlineData(new[] {3, 3, 3, 3, 1}, 12)]
         public void Return_score_for_4ofAKind(int[] dice, int expected)
         {
-            Score score = new Score();
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, score.NumberOfAKind(dice,4));
+            Assert.Equal(expected, categoryLogic.NumberOfAKind(dice, 4));
         }
-        
+
         [Theory]
-        [InlineData(new[] {1,2,3,4,5}, 15)] 
-        [InlineData(new[] {3,3,3,3,1}, 0)]
-        [InlineData(new[] {5,6,2,4,3}, 20)]
+        [InlineData(new[] {1, 2, 3, 4, 5}, 15)]
+        [InlineData(new[] {3, 3, 3, 3, 1}, 0)]
+        [InlineData(new[] {5, 6, 2, 4, 3}, 20)]
         public void return_score_for_straight(int[] dice, int expected)
         {
-            Score score = new Score();
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, score.Straight(dice));
+            Assert.Equal(expected, categoryLogic.Straight(dice));
         }
-    }
 
-    public class Score
-    {
-        public int Chance(int[] dice)
+        [Theory]
+        [InlineData(new[] {1, 1, 2, 2, 2}, 8)]
+        [InlineData(new[] {3, 3, 2, 2, 1}, 0)]
+        [InlineData(new[] {4, 4, 4, 4, 4}, 0)]
+        [InlineData(new[] {5, 5, 4, 4, 4}, 22)]
+        public void return_score_for_Full_House(int[] dice, int expected)
         {
-            return dice.Sum();
-        }
+            CategoryLogic categoryLogic = new CategoryLogic();
 
-        public int SameNumber(int[] dice)
-        {
-            return (dice.All(d => d == dice[0])) ? 50 : 0;
-        }
-
-        public int SumNumber(int[] dice, int num)
-        {
-            return (dice.Where(d => d == num).Sum());
-        }
-        
-        public int TwoPair(int[] dice)
-        {
-            int sum = 0, count = 0;
-
-            Array.Sort(dice);
-            Array.Reverse(dice);
-
-            for (var i = 0; i < dice.Length - 1; i++)
-            {
-                if (dice[i] == dice[i + 1])
-                {
-                    sum += dice[i] * 2;
-                    count++;
-                    i++;
-                }
-
-                if (count == 2) return sum;
-            }
-
-            return 0;
-        }
-
-        public int NumberOfAKind(int[] dice, int numOfAKind)
-        {  
-            for (var i = 6; i > 0; i--)
-            {
-                if (dice.Count(d => d == i) >= numOfAKind)
-                {
-                    return i * numOfAKind;
-                }
-            } 
-            return 0;
-        }
-
-        public int Straight(int[] dice)
-        {
-            Array.Sort(dice);
-
-            for (int i = 0; i < dice.Length - 1; i++)
-            {
-                if (dice[i + 1] - dice[i] != 1) return 0;
-            }
-
-            return dice.Sum();
+            Assert.Equal(expected, categoryLogic.FullHouse(dice));
         }
     }
 }
