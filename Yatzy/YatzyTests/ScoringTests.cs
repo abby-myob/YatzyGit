@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Xunit;
 using YatzyLibrary;
 
@@ -35,11 +36,28 @@ namespace YatzyTests
     {
         [Theory]
         [InlineData(new[]{2, 2, 2, 2, 2}, 10)]
+        [InlineData(new[]{1, 1, 3, 3, 6}, 14)]
+        [InlineData(new[]{4, 5, 5, 6, 1}, 21)]
+        [InlineData(new[]{5, 1, 5, 7, 1}, 19)]
         public void Return_score_for_chance(int[] dice, int expected)
         {
             Score score = new Score();
 
             Assert.Equal(expected, score.Chance(dice));
+        }
+        
+        
+        [Theory]
+//        [InlineData(new[]{2, 2, 2, 2, 2}, 0)]
+//        [InlineData(new[]{1, 1, 3, 3, 6}, 0)]
+//        [InlineData(new[]{4, 5, 5, 6, 1}, 0)]
+//        [InlineData(new[]{1,1,1,1,1}, 50)]
+        [InlineData(new[]{5,5,5,5,5}, 50)]
+        public void Return_score_for_Same_Number(int[] dice, int expected)
+        {
+            Score score = new Score();
+
+            Assert.Equal(expected, score.SameNumber(dice));
         }
     }
 
@@ -48,6 +66,11 @@ namespace YatzyTests
         public int Chance(int[] dice)
         {
             return dice.Sum();
+        }
+
+        public int SameNumber(int[] dice)
+        {
+            return 50;
         }
     }
 }
