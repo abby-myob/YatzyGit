@@ -101,6 +101,18 @@ namespace YatzyTests
 
             Assert.Equal(expected, score.TwoPair(dice));
         }
+        
+        [Theory]
+        [InlineData(new[] {1, 1, 3, 3, 3}, 9)]
+        [InlineData(new[] {1, 1, 2, 3, 4}, 0)]
+        [InlineData(new[] {1, 1, 2, 2, 2}, 6)]
+        [InlineData(new[] {1, 2, 2, 2, 2}, 6)]
+        public void Return_score_for_3ofAKind(int[] dice, int expected)
+        {
+            Score score = new Score();
+
+            Assert.Equal(expected, score.ThreeOfAKind(dice));
+        }
     }
 
     public class Score
@@ -150,6 +162,19 @@ namespace YatzyTests
                 }
 
                 if (count == 2) return sum;
+            }
+
+            return 0;
+        }
+
+        public int ThreeOfAKind(int[] dice)
+        {
+            Array.Sort(dice);
+            Array.Reverse(dice);
+            
+            for (var i = 0; i < dice.Length - 1; i++)
+            {
+                if (dice[i] == dice[i + 1]) return dice[i] * 2;
             }
 
             return 0;
