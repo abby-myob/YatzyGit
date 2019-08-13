@@ -88,7 +88,7 @@ namespace YatzyTests
         {
             Score score = new Score();
 
-            Assert.Equal(expected, score.Pair(dice));
+            Assert.Equal(expected, score.NumberOfAKind(dice, 2));
         }
 
         [Theory]
@@ -111,7 +111,7 @@ namespace YatzyTests
         {
             Score score = new Score();
 
-            Assert.Equal(expected, score.ThreeOfAKind(dice));
+            Assert.Equal(expected, score.NumberOfAKind(dice,3));
         }
     }
 
@@ -131,20 +131,7 @@ namespace YatzyTests
         {
             return (dice.Where(d => d == num).Sum());
         }
-
-        public int Pair(int[] dice)
-        {
-            Array.Sort(dice);
-            Array.Reverse(dice);
-            
-            for (var i = 0; i < dice.Length - 1; i++)
-            {
-                if (dice[i] == dice[i + 1]) return dice[i] * 2;
-            }
-
-            return 0;
-        }
-
+        
         public int TwoPair(int[] dice)
         {
             int sum = 0, count = 0;
@@ -167,16 +154,15 @@ namespace YatzyTests
             return 0;
         }
 
-        public int ThreeOfAKind(int[] dice)
-        {
-            for (int i = 0; i < dice.Length; i++)
+        public int NumberOfAKind(int[] dice, int numOfAKind)
+        {  
+            for (var i = 6; i > 0; i--)
             {
-                if (dice.Count(d => d == i) >= 3)
+                if (dice.Count(d => d == i) >= numOfAKind)
                 {
-                    return i * 3;
+                    return i * numOfAKind;
                 }
-            }
-
+            } 
             return 0;
         }
     }
