@@ -172,9 +172,9 @@ namespace YatzyTests
             Array.Sort(dice);
             Array.Reverse(dice);
             
-            for (var i = 0; i < dice.Length - 1; i++)
+            for (var i = 0; i < dice.Length - 2; i++)
             {
-                if (dice[i] == dice[i + 1]) return dice[i] * 2;
+                if (dice[i] == dice[i + 1] && dice[i] == dice[i + 2]) return dice[i] * 3;
             }
 
             return 0;
