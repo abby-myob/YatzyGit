@@ -93,9 +93,8 @@ namespace YatzyTests
         
         [Theory]
         [InlineData(new[] {1,1,2,3,3}, 8)]
-        [InlineData(new[] {1,1,6,2,6}, 12)]
-        [InlineData(new[] {3,3,3,4,1}, 6)]
-        [InlineData(new[] {3,3,3,3,1}, 6)]
+        [InlineData(new[] {1,1,2,3,4}, 0)]
+        [InlineData(new[] {1,1,2,2,2}, 6)] 
         public void Return_score_for_Two_Pair(int[] dice, int expected)
         {
             Score score = new Score();
@@ -122,8 +121,7 @@ namespace YatzyTests
         }
 
         public int Pair(int[] dice)
-        {
-            var sum = 0;
+        { 
             Array.Sort(dice);
             Array.Reverse(dice);
             for (int i = 0; i < dice.Length - 1; i++)
@@ -133,12 +131,32 @@ namespace YatzyTests
                     return dice[i]*2;
                 }
             } 
-            return sum;
+            return 0;
         }
 
         public int TwoPair(int[] dice)
         {
-            throw new NotImplementedException();
+            var sum = 0;
+            var count = 0;
+            Array.Sort(dice);
+            Array.Reverse(dice);
+
+            for (int i = 0; i < dice.Length - 1; i++)
+            {
+                if (dice[i] == dice[i + 1])
+                {
+                    sum += dice[i]*2;
+                    count++;
+                    i++;
+                }
+
+                if (count == 2)
+                {
+                    return sum;
+                }
+            }
+            
+            return 0;
         }
     }
 }
