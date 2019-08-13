@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using YatzyLibrary;
 
@@ -46,7 +47,7 @@ namespace YatzyTests
     {
         public int Chance(int[] dice)
         {
-            return 10;
+            return dice.Sum();
         }
     }
 }
