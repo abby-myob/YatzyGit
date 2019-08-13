@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -79,8 +80,8 @@ namespace YatzyTests
         }
         
         [Theory]
-//        [InlineData(new[] {3,3,3,4,4}, 8)]
-//        [InlineData(new[] {1,1,6,2,6}, 12)]
+        [InlineData(new[] {3,3,3,4,4}, 8)]
+        [InlineData(new[] {1,1,6,2,6}, 12)]
         [InlineData(new[] {3,3,3,4,1}, 6)]
         [InlineData(new[] {3,3,3,3,1}, 6)]
         public void Return_score_for_Pair(int[] dice, int expected)
@@ -88,6 +89,18 @@ namespace YatzyTests
             Score score = new Score();
 
             Assert.Equal(expected, score.Pair(dice));
+        }
+        
+        [Theory]
+        [InlineData(new[] {1,1,2,3,3}, 8)]
+        [InlineData(new[] {1,1,6,2,6}, 12)]
+        [InlineData(new[] {3,3,3,4,1}, 6)]
+        [InlineData(new[] {3,3,3,3,1}, 6)]
+        public void Return_score_for_Two_Pair(int[] dice, int expected)
+        {
+            Score score = new Score();
+
+            Assert.Equal(expected, score.TwoPair(dice));
         }
     }
 
@@ -110,7 +123,22 @@ namespace YatzyTests
 
         public int Pair(int[] dice)
         {
-            return 6;
+            var sum = 0;
+            Array.Sort(dice);
+            Array.Reverse(dice);
+            for (int i = 0; i < dice.Length - 1; i++)
+            {
+                if (dice[i] == dice[i + 1])
+                {
+                    return dice[i]*2;
+                }
+            } 
+            return sum;
+        }
+
+        public int TwoPair(int[] dice)
+        {
+            throw new NotImplementedException();
         }
     }
 }
