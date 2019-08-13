@@ -7,6 +7,11 @@ namespace YatzyLibrary
         public Die()
         {
             Value = 1;
-        } 
+        }
+
+        public void Roll()
+        {
+            Value = 5;
+        }
     }
 }
