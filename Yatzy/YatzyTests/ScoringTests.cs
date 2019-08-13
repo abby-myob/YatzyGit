@@ -59,18 +59,23 @@ namespace YatzyTests
 
             Assert.Equal(expected, score.SameNumber(dice));
         }
-        
+
         [Theory]
-//        [InlineData(new[] {2, 2, 2, 2, 2}, 0)]
-//        [InlineData(new[] {1, 1, 3, 3, 6}, 2)]
-//        [InlineData(new[] {4, 5, 5, 6, 1}, 1)]
-//        [InlineData(new[] {1, 1, 1, 1, 1}, 5)]
-        [InlineData(new[] {5, 5, 5, 5, 5}, 0)]
-        public void Return_score_for_Ones(int[] dice, int expected)
+        [InlineData(new[] {2, 2, 2, 2, 2}, 1, 0)]
+        [InlineData(new[] {1, 1, 3, 3, 6}, 1, 2)]
+        [InlineData(new[] {4, 5, 5, 6, 1}, 1, 1)]
+        [InlineData(new[] {1, 1, 1, 1, 1}, 1, 5)]
+        [InlineData(new[] {5, 5, 5, 5, 5}, 1, 0)]
+        [InlineData(new[] {2, 2, 2, 2, 2}, 2, 10)]
+        [InlineData(new[] {1, 1, 3, 3, 6}, 3, 6)]
+        [InlineData(new[] {4, 5, 5, 6, 1}, 5, 10)]
+        [InlineData(new[] {1, 1, 1, 3, 1}, 1, 4)]
+        [InlineData(new[] {5, 5, 5, 3, 5}, 1, 0)]
+        public void Return_score_for_Ones(int[] dice, int num, int expected)
         {
             Score score = new Score();
 
-            Assert.Equal(expected, score.Ones(dice));
+            Assert.Equal(expected, score.SumNumber(dice, num));
         }
     }
 
@@ -86,9 +91,9 @@ namespace YatzyTests
             return (dice.All(d => d == dice[0])) ? 50 : 0;
         }
 
-        public int Ones(int[] dice)
+        public int SumNumber(int[] dice, int num)
         {
-            return 0;
+            return (dice.Where(d => d == num).Sum());
         }
     }
 }
