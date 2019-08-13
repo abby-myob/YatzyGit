@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\YatzyLibrary\YatzyLibrary.csproj" />
+        <ProjectReference Include="..\YatzyLibrary\YatzyLibrary.csproj" />
     </ItemGroup>
 
 </Project>
