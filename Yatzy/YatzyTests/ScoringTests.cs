@@ -129,11 +129,12 @@ namespace YatzyTests
         [Theory]
         [InlineData(new[] {1,2,3,4,5}, 15)] 
         [InlineData(new[] {3,3,3,3,1}, 0)]
-        public void return_score_for_small_straight(int[] dice, int expected)
+        [InlineData(new[] {5,6,2,4,3}, 20)]
+        public void return_score_for_straight(int[] dice, int expected)
         {
             Score score = new Score();
 
-            Assert.Equal(expected, score.SmallStraight(dice);
+            Assert.Equal(expected, score.Straight(dice));
         }
     }
 
@@ -188,9 +189,16 @@ namespace YatzyTests
             return 0;
         }
 
-        public int SmallStraight(int[] dice)
+        public int Straight(int[] dice)
         {
-            throw new NotImplementedException();
+            Array.Sort(dice);
+
+            for (int i = 0; i < dice.Length - 1; i++)
+            {
+                if (dice[i + 1] - dice[i] != 1) return 0;
+            }
+
+            return dice.Sum();
         }
     }
 }
