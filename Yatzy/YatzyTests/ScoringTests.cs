@@ -169,12 +169,12 @@ namespace YatzyTests
 
         public int ThreeOfAKind(int[] dice)
         {
-            Array.Sort(dice);
-            Array.Reverse(dice);
-            
-            for (var i = 0; i < dice.Length - 2; i++)
+            for (int i = 0; i < dice.Length; i++)
             {
-                if (dice[i] == dice[i + 1] && dice[i] == dice[i + 2]) return dice[i] * 3;
+                if (dice.Count(d => d == i) >= 3)
+                {
+                    return i * 3;
+                }
             }
 
             return 0;
