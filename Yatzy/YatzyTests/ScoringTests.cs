@@ -113,6 +113,18 @@ namespace YatzyTests
 
             Assert.Equal(expected, score.NumberOfAKind(dice,3));
         }
+        
+        [Theory]
+        [InlineData(new[] {2,2,2,2,5}, 8)]
+        [InlineData(new[] {6,6,6,6,6}, 24)]
+        [InlineData(new[] {3,3,4,5,6}, 0)]
+        [InlineData(new[] {3,3,3,3,1}, 12)]
+        public void Return_score_for_4ofAKind(int[] dice, int expected)
+        {
+            Score score = new Score();
+
+            Assert.Equal(expected, score.NumberOfAKind(dice,4));
+        }
     }
 
     public class Score
