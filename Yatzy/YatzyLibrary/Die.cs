@@ -1,17 +1,19 @@
+using System;
+
 namespace YatzyLibrary
 {
-    public class Die
+    public class Die : IDie
     {
         public int Value { get; private set; }
+        private readonly Random _random = new Random();
         
         public Die()
         {
-            Value = 1;
-        }
-
+            Value = _random.Next(1, 7);
+        } 
         public void Roll()
-        {
-            Value = 5;
+        { 
+            Value = _random.Next(1, 7);
         }
     }
 }

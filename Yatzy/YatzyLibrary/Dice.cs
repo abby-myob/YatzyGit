@@ -1,21 +1,31 @@
-using System.Collections.Generic; 
+using System;
+using System.Collections.Generic;
 
 namespace YatzyLibrary
 {
-    public class Dice
-    {  
-        public List<Die> DiceList = new List<Die>();
+    public class Dice : IDice
+    {
+        private readonly List<Die> _diceList;
 
+        public Dice()
+        {
+            _diceList = new List<Die>
+            {
+                new Die(), new Die(), new Die(), new Die(), new Die()
+            };
+        } 
+        
         public List<Die> GetDice()
         {
-            var dice = new List<Die>();
-            
-            for (var i = 0; i < 5; i++)
-            {
-                dice.Add(new Die());
-            }
+            return _diceList;
+        }
 
-            return dice;
+        public void Roll()
+        {
+            foreach (var die in _diceList)
+            {
+                die.Roll();
+            }
         }
     }
 }

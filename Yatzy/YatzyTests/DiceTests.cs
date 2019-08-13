@@ -14,7 +14,7 @@ namespace YatzyTests
 
             foreach (var die in list)
             {
-                Assert.Equal(1, die.Value);
+                Assert.True(die.Value > 0 && die.Value < 7);
             }
         }
 
@@ -33,7 +33,20 @@ namespace YatzyTests
             var die = new Die();
             die.Roll();
 
-            Assert.Equal(5, die.Value);
+            Assert.True(die.Value > 0 && die.Value < 7);
+        }
+        
+        [Fact]
+        public void Check_dice_roll_works()
+        {
+            var dice = new Dice();
+            dice.Roll();
+            var list = dice.GetDice();
+
+            foreach (var die in list)
+            {
+                Assert.True(die.Value > 0 && die.Value < 7);
+            }
         }
     }
 }
