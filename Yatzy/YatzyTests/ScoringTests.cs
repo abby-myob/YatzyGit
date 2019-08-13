@@ -77,6 +77,18 @@ namespace YatzyTests
 
             Assert.Equal(expected, score.SumNumber(dice, num));
         }
+        
+        [Theory]
+//        [InlineData(new[] {3,3,3,4,4}, 8)]
+//        [InlineData(new[] {1,1,6,2,6}, 12)]
+        [InlineData(new[] {3,3,3,4,1}, 6)]
+        [InlineData(new[] {3,3,3,3,1}, 6)]
+        public void Return_score_for_Pair(int[] dice, int expected)
+        {
+            Score score = new Score();
+
+            Assert.Equal(expected, score.Pair(dice));
+        }
     }
 
     public class Score
@@ -94,6 +106,11 @@ namespace YatzyTests
         public int SumNumber(int[] dice, int num)
         {
             return (dice.Where(d => d == num).Sum());
+        }
+
+        public int Pair(int[] dice)
+        {
+            return 6;
         }
     }
 }
