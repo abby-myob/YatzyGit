@@ -59,6 +59,19 @@ namespace YatzyTests
 
             Assert.Equal(expected, score.SameNumber(dice));
         }
+        
+        [Theory]
+//        [InlineData(new[] {2, 2, 2, 2, 2}, 0)]
+//        [InlineData(new[] {1, 1, 3, 3, 6}, 2)]
+//        [InlineData(new[] {4, 5, 5, 6, 1}, 1)]
+//        [InlineData(new[] {1, 1, 1, 1, 1}, 5)]
+        [InlineData(new[] {5, 5, 5, 5, 5}, 0)]
+        public void Return_score_for_Ones(int[] dice, int expected)
+        {
+            Score score = new Score();
+
+            Assert.Equal(expected, score.Ones(dice));
+        }
     }
 
     public class Score
@@ -71,6 +84,11 @@ namespace YatzyTests
         public int SameNumber(int[] dice)
         {
             return (dice.All(d => d == dice[0])) ? 50 : 0;
+        }
+
+        public int Ones(int[] dice)
+        {
+            return 0;
         }
     }
 }
