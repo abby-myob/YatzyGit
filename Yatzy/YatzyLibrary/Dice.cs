@@ -27,5 +27,13 @@ namespace YatzyLibrary
                 die.Roll();
             }
         }
+
+        public void RollSome(int[] toChange)
+        {
+            for (int i = 0; i <= toChange.Length; i++)
+            {
+                _diceList[i].Roll();
+            }
+        }
     }
 }

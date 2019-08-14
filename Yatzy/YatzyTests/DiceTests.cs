@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Xunit;
 using YatzyLibrary;
 
@@ -47,6 +48,54 @@ namespace YatzyTests
             {
                 Assert.True(die.Value > 0 && die.Value < 7);
             }
+        }
+        
+        [Fact]
+        public void Check_dice_roll_works_with_specific_die_to_roll()
+        {
+            var dice = new Dice();
+            dice.RollSome(new int[]{1,2,3});
+            var list = dice.GetDice();
+
+            foreach (var die in list)
+            {
+                Assert.True(die.Value > 0 && die.Value < 7);
+            }
+        }
+    }
+
+    public class PersonTests
+    {
+        [Fact]
+        public void Check_dice_roll_works_in_person()
+        {
+            var person = new Person("Abby");
+
+            person.Roll();
+            person.GetDice();
+            
+            Assert.True(die.Value > 0 && die.Value < 7);
+        }
+    }
+
+    public class Person
+    {
+        private string Name { get; }
+        private Dice dice = new Dice();
+        
+        public Person(string name)
+        {
+            Name = name;
+        }
+
+        public void Roll()
+        {
+            dice.Roll();
+        }
+
+        public List<Die> GetDieList()
+        {
+            return dice.GetDice();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace YatzyLibrary
         
         public Die()
         {
-            Value = _random.Next(1, 7);
+            Roll();
         } 
         public void Roll()
         { 
