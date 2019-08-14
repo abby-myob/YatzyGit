@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using YatzyLibrary;
 
 namespace Yatzy
 {
@@ -6,7 +8,13 @@ namespace Yatzy
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Yatzeeeeee");
+            Console.WriteLine("Let's play");
+            Console.WriteLine("What's your name?");
+            
+            List<string> names = new List<string>();
+            names.Add(Console.ReadLine());
+            YatzyGame yatzy = new YatzyGame(names);
         }
     }
 }

@@ -30,9 +30,9 @@ namespace YatzyLibrary
 
         public void RollSome(int[] toChange)
         {
-            for (int i = 0; i <= toChange.Length; i++)
+            foreach (var x in toChange)
             {
-                _diceList[i].Roll();
+                _diceList[x - 1].Roll();
             }
         }
     }
