@@ -8,13 +8,11 @@ namespace Yatzy
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Yatzeeeeee");
-            Console.WriteLine("Let's play");
-            Console.WriteLine("What's your name?");
+            var consoleIO = new ConsoleResponseThingy();
+            YatzyGame yatzy = new YatzyGame(consoleIO);
             
-            List<string> names = new List<string>();
-            names.Add(Console.ReadLine());
-            YatzyGame yatzy = new YatzyGame(names);
+            yatzy.Play(); 
         }
     }
+
 }

@@ -10,7 +10,7 @@ namespace YatzyLibrary
             return dice.Sum();
         }
 
-        public int SameNumber(int[] dice)
+        public int Yatzy(int[] dice)
         {
             return (dice.All(d => d == dice[0])) ? 50 : 0;
         }

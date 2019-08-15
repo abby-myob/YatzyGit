@@ -25,11 +25,11 @@ namespace YatzyTests
         [InlineData(new[] {4, 5, 5, 6, 1}, 0)]
         [InlineData(new[] {1, 1, 1, 1, 1}, 50)]
         [InlineData(new[] {5, 5, 5, 5, 5}, 50)]
-        public void Return_score_for_Same_Number(int[] dice, int expected)
+        public void Return_score_for_Yatzy(int[] dice, int expected)
         {
             CategoryLogic categoryLogic = new CategoryLogic();
 
-            Assert.Equal(expected, categoryLogic.SameNumber(dice));
+            Assert.Equal(expected, categoryLogic.Yatzy(dice));
         }
 
         [Theory]

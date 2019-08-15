@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace YatzyLibrary
+namespace YatzyLibrary.Interfaces
 {
     public interface IDice
     {

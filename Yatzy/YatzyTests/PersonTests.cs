@@ -9,7 +9,7 @@ namespace YatzyTests
         [Fact]
         public void Check_dice_roll_works_in_person()
         {
-            var person = new Person("Abby");
+            var person = new Player("Abby");
 
             person.Roll(new[]{5,4,3});
             List<Die> list = person.GetDieList();

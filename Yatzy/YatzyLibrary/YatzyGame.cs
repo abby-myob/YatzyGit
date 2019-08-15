@@ -1,17 +1,50 @@
 using System.Collections.Generic;
+using System.Linq;
+using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
 {
     public class YatzyGame
     {
-        public readonly List<Person> _people = new List<Person>();
-        
-        public YatzyGame(List<string> names)
+        private Player _player;
+        private readonly IResponseThingy _io;
+
+        public YatzyGame(IResponseThingy io)
         {
-            foreach (var name in names)
+            _io = io; 
+            _player = new Player(io.GetPlayerName()); 
+        }
+
+        public void Play()
+        {
+            _io.PrintWelcome();
+        }
+
+
+
+
+
+        public void Round()
+        {
+            
+        }
+        
+        public void Roll(int[] toRoll)
+        {
+            _player.Roll(toRoll);
+        }
+
+        public string[] GetDice()
+        {
+            var dice = new string[]{}; 
+            List<Die> dies = _player.GetDieList();
+
+            foreach (var die in dies)
             {
-                _people.Add(new Person(name));
-            }
+                dice.Append(die.Value.ToString());
+            } 
+            
+            return dice;
         }
     }
 }

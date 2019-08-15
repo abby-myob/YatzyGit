@@ -1,4 +1,4 @@
-namespace YatzyLibrary
+namespace YatzyLibrary.Interfaces
 {
     public interface IDie
     {
