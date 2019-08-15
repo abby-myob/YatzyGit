@@ -8,19 +8,19 @@ namespace YatzyLibrary
 
         public string GetPlayerName()
         {
-            Console.WriteLine("Please enter a player name:");
+            Console.WriteLine(Constants.GetPlayerName);
             return Console.ReadLine();
         }
 
         public Boolean RollAgainQuestion()
         {
-            Console.WriteLine("Would you like to roll again? (y/n)");
-            return Console.ReadLine() != "y" || Console.ReadLine() != "Y";
+            Console.WriteLine(Constants.RollAgainQuestion);
+            return Console.ReadLine() == "y" || Console.ReadLine() == "Y";
         }
 
         public int[] WhatDiceToRollAgain()
         {
-            Console.WriteLine("What dice would you like to roll again? (1,4,5)");
+            Console.WriteLine(Constants.WhatDiceToRollAgain);
             
             // get list of dice and then output as a int[]
             return new []{2, 3, 4};
@@ -28,18 +28,18 @@ namespace YatzyLibrary
 
         public string ChooseCategory()
         {
-            Console.WriteLine("Please choose your category");
+            Console.WriteLine(Constants.ChooseCategory);
             return Console.ReadLine();
         }
         
         public void PrintWelcome()
         {
-            Console.WriteLine("Welcome to Yatzy");
+            Console.WriteLine(Constants.Welcome);
         }
         
         public void PrintDice(int[] dice)
         {
-            Console.Write("Dice: ");
+            Console.Write(Constants.Dice);
             foreach (var die in dice)
             {
                 Console.Write($"{die} ");
@@ -50,6 +50,11 @@ namespace YatzyLibrary
         public void PrintScore(Player player)
         {
             Console.WriteLine($"{player.Name}{player.Score}");
+        }
+
+        public void RollsToGo(int rolls)
+        {
+            Console.WriteLine(rolls == 1 ? Constants.NoRollsLeft : Constants.OneRollLeft);
         }
     }
 }

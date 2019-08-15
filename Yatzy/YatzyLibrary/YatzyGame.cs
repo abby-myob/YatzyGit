@@ -6,45 +6,54 @@ namespace YatzyLibrary
 {
     public class YatzyGame
     {
-        private Player _player;
+        private readonly Player _player;
         private readonly IResponseThingy _io;
 
         public YatzyGame(IResponseThingy io)
-        {
+        { 
             _io = io; 
+            _io.PrintWelcome();
             _player = new Player(io.GetPlayerName()); 
         }
 
         public void Play()
         {
-            _io.PrintWelcome();
+           _io.PrintDice(GetDice());
+
+           if (_player.Categories.Count > 0)
+           {
+               Rolling();
+               Scoring();
+
+           }
+        } 
+
+        private void Rolling()
+        {
+            int rolls = 0; 
+            while (rolls < 2)
+            {
+                _io.RollAgainQuestion();
+                _player.Roll(_io.WhatDiceToRollAgain());
+                _io.PrintDice(GetDice());
+                _io.RollsToGo(rolls);
+                rolls++;
+            }
         }
 
-
-
-
-
-        public void Round()
+        private void Scoring()
         {
             
         }
-        
-        public void Roll(int[] toRoll)
-        {
-            _player.Roll(toRoll);
-        }
 
-        public string[] GetDice()
-        {
-            var dice = new string[]{}; 
+
+        public int[] GetDice()
+        { 
             List<Die> dies = _player.GetDieList();
 
-            foreach (var die in dies)
-            {
-                dice.Append(die.Value.ToString());
-            } 
-            
-            return dice;
+            IEnumerable<int> dice = dies.Select(x => x.Value); 
+
+            return dice.ToArray();
         }
     }
 }
