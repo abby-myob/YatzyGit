@@ -1,18 +1,19 @@
 using System.Collections.Generic;
+using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
 {
     public class Player
     {
         public string Name { get; }
-        private readonly Dice _dice;
+        private readonly IDice _dice; 
         public int Score { get; private set; }
         public List<string> Categories { get; }
 
-        public Player(string name)
+        public Player(string name, IDice dice)
         {
             Name = name;
-            _dice = new Dice();
+            _dice = dice;
             Score = 0;
             Categories = new List<string>
             {
@@ -27,7 +28,7 @@ namespace YatzyLibrary
             _dice.RollSome(toChange);
         }
 
-        public List<Die> GetDieList()
+        public List<IDie> GetDieList()
         {
             return _dice.GetDice();
         } 
@@ -40,6 +41,11 @@ namespace YatzyLibrary
         public void RemoveCategories(string category)
         {
             Categories.Remove(category);
-        } 
+        }
+
+        public bool IsGameOver()
+        {
+            return Categories.Count == 0;
+        }
     }
 }

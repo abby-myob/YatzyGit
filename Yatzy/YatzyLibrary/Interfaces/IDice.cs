@@ -4,7 +4,8 @@ namespace YatzyLibrary.Interfaces
 {
     public interface IDice
     {
-        List<Die> GetDice();
+        List<IDie> GetDice();
         void Roll();
+        void RollSome(int[] toChange);
     }
 }

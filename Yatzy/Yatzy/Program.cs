@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using YatzyLibrary;
+﻿using YatzyLibrary;
 
 namespace Yatzy
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var consoleIO = new ConsoleResponseThingy();
-            YatzyGame yatzy = new YatzyGame(consoleIO);
+            var consoleIo = new ConsoleResponseThingy();
+            var yatzy = new YatzyGame(consoleIo);
             
             yatzy.Play(); 
         }

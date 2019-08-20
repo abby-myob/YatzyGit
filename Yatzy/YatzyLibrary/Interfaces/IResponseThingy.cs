@@ -17,6 +17,7 @@ namespace YatzyLibrary.Interfaces
         void PrintDice(int[] dice);
 
         void PrintScore(Player player);
+        
         void RollsToGo(int rolls);
     }
 }

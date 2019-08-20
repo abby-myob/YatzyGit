@@ -6,17 +6,17 @@ namespace YatzyLibrary
 {
     public class Dice : IDice
     {
-        private readonly List<Die> _diceList;
+        private readonly List<IDie> _diceList;
 
         public Dice()
         {
-            _diceList = new List<Die>
+            _diceList = new List<IDie>
             {
                 new Die(), new Die(), new Die(), new Die(), new Die()
             };
         } 
         
-        public List<Die> GetDice()
+        public List<IDie> GetDice()
         {
             return _diceList;
         }

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
@@ -13,47 +11,18 @@ namespace YatzyLibrary
         { 
             _io = io; 
             _io.PrintWelcome();
-            _player = new Player(io.GetPlayerName()); 
+            var dice = new Dice();
+            _player = new Player(io.GetPlayerName(), dice); 
         }
 
         public void Play()
         {
-           _io.PrintDice(GetDice());
+            Round round = new Round(_io, _player);
 
-           if (_player.Categories.Count > 0)
-           {
-               Rolling();
-               Scoring();
-
-           }
-        } 
-
-        private void Rolling()
-        {
-            int rolls = 0; 
-            while (rolls < 2)
+            if (_player.IsGameOver())
             {
-                _io.RollAgainQuestion();
-                _player.Roll(_io.WhatDiceToRollAgain());
-                _io.PrintDice(GetDice());
-                _io.RollsToGo(rolls);
-                rolls++;
+                round.Play();
             }
-        }
-
-        private void Scoring()
-        {
-            
-        }
-
-
-        public int[] GetDice()
-        { 
-            List<Die> dies = _player.GetDieList();
-
-            IEnumerable<int> dice = dies.Select(x => x.Value); 
-
-            return dice.ToArray();
-        }
+        } 
     }
 }

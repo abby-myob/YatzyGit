@@ -60,6 +60,6 @@ namespace YatzyTests
             {
                 Assert.True(die.Value > 0 && die.Value < 7);
             }
-        }
+        } 
     }
 }
