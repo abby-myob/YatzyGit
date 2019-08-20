@@ -3,7 +3,7 @@ using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
 {
-    public class ConsoleResponseThingy : IResponseThingy
+    public class ConsoleResponseThingy : IResponseThingy 
     {
 
         public string GetPlayerName()
@@ -47,10 +47,10 @@ namespace YatzyLibrary
             Console.WriteLine("");
         }
 
-        public void PrintScore(Player player)
-        {
-            Console.WriteLine($"{player.Name}{player.Score}");
-        }
+//        public void PrintScore(Player player)
+//        {
+//            Console.WriteLine($"{player.Name}{player.Score}");
+//        }
 
         public void RollsToGo(int rolls)
         {

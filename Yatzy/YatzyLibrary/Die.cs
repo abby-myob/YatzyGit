@@ -1,20 +1,26 @@
 using System;
-using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
 {
+    public interface IDie
+    {
+        int Value { get; }
+        void SetDie(int value);
+    }
+
     public class Die : IDie
     {
         public int Value { get; private set; }
-        private readonly Random _random = new Random();
-        
-        public Die()
+
+        public Die(int value)
         {
-            Roll();
-        } 
-        public void Roll()
-        { 
-            Value = _random.Next(1, 7);
+            Value = value;
+        }
+
+        public void SetDie(int value)
+        {
+            if (value > 6 || value < 1) throw new ArgumentException("Setting die value outside of 6 and 1");
+            Value = value;
         }
     }
 }

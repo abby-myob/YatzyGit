@@ -12,7 +12,7 @@ namespace YatzyLibrary
 
         public const string ChooseCategory = "Please choose your category";
 
-        public const string Dice = "These are your: ";
+        public const string Dice = "These are your dice: ";
 
         public const string OneRollLeft = "You have one roll left.";
         public const string NoRollsLeft = "You have no rolls left.";

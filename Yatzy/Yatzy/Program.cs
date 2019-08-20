@@ -6,10 +6,10 @@ namespace Yatzy
     {
         private static void Main(string[] args)
         {
-            var consoleIo = new ConsoleResponseThingy();
-            var yatzy = new YatzyGame(consoleIo);
-            
-            yatzy.Play(); 
+//            var consoleIo = new ConsoleResponseThingy();
+//            var yatzy = new YatzyGame(consoleIo);
+//            
+//            yatzy.Play(); 
         }
     }
 
