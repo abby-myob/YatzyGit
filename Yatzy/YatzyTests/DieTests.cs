@@ -14,7 +14,7 @@ namespace YatzyTests
         public void Return_set_die(int expected)
         {
             //Arrange
-            IDie die = new Die(1);
+            IDie die = new Die();
             //Act
             die.SetDie(expected);
             //Assert
@@ -30,7 +30,7 @@ namespace YatzyTests
         public void exception_with_incorrect_die_setting(int input)
         {
             //arrange
-            var die = new Die(1); 
+            var die = new Die(); 
             //act
             void Act() => die.SetDie(input);
             //assert
