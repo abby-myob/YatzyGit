@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
@@ -18,12 +20,21 @@ namespace YatzyLibrary
             return Console.ReadLine() == "y" || Console.ReadLine() == "Y";
         }
 
-        public int[] WhatDiceToRollAgain()
+        public bool[] WhatDiceToRollAgain()
         {
             Console.WriteLine(Constants.WhatDiceToRollAgain);
             
-            // get list of dice and then output as a int[]
-            return new []{2, 3, 4};
+            var output = new List<bool>();
+            var input = Console.ReadLine(); 
+            
+            if (input == null) return output.ToArray();
+
+            foreach (var die in input)
+            { 
+                output.Add(die == 'y');
+            }
+ 
+            return output.ToArray();
         }
 
         public string ChooseCategory()
@@ -47,14 +58,14 @@ namespace YatzyLibrary
             Console.WriteLine("");
         }
 
-//        public void PrintScore(Player player)
-//        {
-//            Console.WriteLine($"{player.Name}{player.Score}");
-//        }
+        public void PrintScore(Player player)
+        {
+            Console.WriteLine($"{player.GetName()}{player.GetScore()}");
+        }
 
         public void RollsToGo(int rolls)
         {
-            Console.WriteLine(rolls == 1 ? Constants.NoRollsLeft : Constants.OneRollLeft);
+            Console.WriteLine(rolls == 0 ? Constants.NoRollsLeft : Constants.OneRollLeft);
         }
     }
 }

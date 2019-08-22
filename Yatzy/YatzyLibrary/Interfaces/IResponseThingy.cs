@@ -6,7 +6,7 @@ namespace YatzyLibrary.Interfaces
     {
         string GetPlayerName();
         Boolean RollAgainQuestion();
-        int[] WhatDiceToRollAgain();
+        bool[] WhatDiceToRollAgain();
         string ChooseCategory();
         void PrintWelcome();
         void PrintDice(int[] dice);

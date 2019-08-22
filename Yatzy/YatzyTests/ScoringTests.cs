@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using Xunit;
 using YatzyLibrary;
 
@@ -118,6 +117,43 @@ namespace YatzyTests
             CategoryLogic categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.FullHouse(dice));
+        }
+        
+        [Theory]
+        [InlineData("pair", new[]{1,1,1,1,1}, 2)] 
+        [InlineData("pair", new[]{1,2,3,4,5}, 0)] 
+        [InlineData("two pair", new[]{1,1,1,1,1}, 4)] 
+        [InlineData("two pair", new[]{1,2,3,4,5}, 0)] 
+        
+        [InlineData("ones", new[]{1,1,1,1,1}, 5)] 
+        [InlineData("ones", new[]{1,1,1,1,3}, 4)] 
+        [InlineData("twos", new[]{3,3,3,3,3}, 0)] 
+        [InlineData("twos", new[]{3,3,3,3,2}, 2)] 
+        [InlineData("threes", new[]{3,3,2,3,4}, 9)] 
+        [InlineData("fours", new[]{4,4,4,4,4}, 20)] 
+        [InlineData("fives", new[]{5,5,5,5,5}, 25)] 
+        [InlineData("sixes", new[]{1,1,1,1,6}, 6)]  
+        
+        [InlineData("chance", new[]{1,1,1,1,1}, 5)] 
+        [InlineData("yatzy", new[]{1,1,1,1,1}, 50)] 
+        [InlineData("yatzy", new[]{1,1,0,1,1}, 0)] 
+        
+        [InlineData("three of a kind", new[]{1,1,1,1,1}, 3)] 
+        [InlineData("four of a kind", new[]{1,1,1,1,1}, 4)] 
+        [InlineData("small straight", new[]{1,2,3,4,5}, 15)] 
+        [InlineData("large straight", new[]{2,3,4,5,6}, 20)] 
+        [InlineData("full house", new[]{1,1,2,2,2}, 8)] 
+        public void check_scoring_stuff(string input, int[] hand, int expected)
+        {
+            // Arrange
+            CategoryLogic categoryLogic = new CategoryLogic();
+            Scoring scoring = new Scoring(categoryLogic);
+            
+            // Act
+            int score = scoring.CreateScore(input, hand);
+
+            // Assert
+            Assert.Equal(expected, score);
         }
     }
 }

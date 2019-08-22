@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
+using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
 {
-    public class CategoryLogic
+    public class CategoryLogic : ICategoryLogic
     {
         public int Chance(int[] dice)
         {

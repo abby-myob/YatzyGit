@@ -3,12 +3,38 @@ using System.Linq;
 
 namespace YatzyLibrary
 {
+    public interface IDieFactory
+    {
+        IDie CreateDie();
+    }
+
+    public class DieFactory: IDieFactory
+    {
+        public IDie CreateDie()
+        {
+            return new Die();
+        }
+    }
+
     public class Hand : IHand
     {
-        private readonly List<IDie> _dices = new List<IDie>
+        private readonly IDieFactory _dieFactory;
+
+        public Hand(IDieFactory dieFactory)
         {
-            new Die(), new Die(), new Die(), new Die(), new Die()
-        };
+            _dieFactory = dieFactory;
+            
+            _dices = new List<IDie>
+            {
+                _dieFactory.CreateDie(), 
+                _dieFactory.CreateDie(), 
+                _dieFactory.CreateDie(), 
+                _dieFactory.CreateDie(), 
+                _dieFactory.CreateDie(), 
+            };
+        }
+
+        private readonly List<IDie> _dices;
 
         public int[] GetDices()
         {
