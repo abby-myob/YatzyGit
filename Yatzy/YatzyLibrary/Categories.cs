@@ -50,5 +50,10 @@ namespace YatzyLibrary
 
             return true; 
         }
+
+        public IDictionary<string, bool> ReturnCategories()
+        {
+            return _categoryList;
+        }
     }
 }

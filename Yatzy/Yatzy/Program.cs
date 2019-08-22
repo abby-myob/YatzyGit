@@ -6,24 +6,24 @@ namespace Yatzy
     internal static class Program
     {
         private static void Main(string[] args)
-        {
-//            var consoleIo = new ConsoleResponseThingy();
-//            var yatzy = new YatzyGame(consoleIo);
-//            
-//            yatzy.Play(); 
+        { 
+            var io = new ConsoleResponseThingy();
 
             var round = new Round(
                 new Player(
                     new Categories(
-                        new Dictionary<string, bool>()), "abby", 0),
+                        new Dictionary<string, bool>()), io.GetPlayerName(), 0),
                 new Roll(
                     new Hand(
                         new DieFactory())),
                 new Scoring(
                     new CategoryLogic()),
-                new ConsoleResponseThingy());
+                io);
 
-            round.StartRolling();
+            var game = new Game(round);
+            
+            game.Play();
+
         }
     }
 }

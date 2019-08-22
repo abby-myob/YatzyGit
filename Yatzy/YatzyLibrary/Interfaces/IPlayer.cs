@@ -8,5 +8,6 @@ namespace YatzyLibrary.Interfaces
         void RemoveCategory(string category);
         bool HasCategoryBeenUsed(string category);
         bool IsAllOutOfCategories();
+        ICategories ReturnCategories();
     }
 }

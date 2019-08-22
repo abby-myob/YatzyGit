@@ -47,5 +47,10 @@ namespace YatzyLibrary
         {
             return _categories.AreAllUsed();
         }
+
+        public ICategories ReturnCategories()
+        {
+            return _categories;
+        }
     }
 }

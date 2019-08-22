@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace YatzyLibrary.Interfaces
 {
@@ -10,7 +11,8 @@ namespace YatzyLibrary.Interfaces
         string ChooseCategory();
         void PrintWelcome();
         void PrintDice(int[] dice);
-//        void PrintScore(Player player);
+        void PrintScore(IPlayer player);
         void RollsToGo(int rolls);
+        void PrintCategories(IDictionary<string, bool> categories);
     }
 }

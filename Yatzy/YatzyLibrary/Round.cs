@@ -1,10 +1,9 @@
-using System.Linq;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
 using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
 {
-    public class Round
+    public class Round : IRound
     {
         private readonly IPlayer _player;
         private readonly IRoll _roll;
@@ -30,20 +29,34 @@ namespace YatzyLibrary
                     _io.PrintDice(_roll.GetHand());
                     break;
                 }
+
                 _roll.RollSome(_io.WhatDiceToRollAgain());
                 _io.PrintDice(_roll.GetHand());
+
             }
         }
 
-        public void Category()
+        public void Scoring()
         {
-            while (_player.HasCategoryBeenUsed(_io.ChooseCategory()) == false)
+            var category = _io.ChooseCategory();
+            if(_player.HasCategoryBeenUsed(category) == false)
             {
-                _scoring.CreateScore(_io.ChooseCategory(), _roll.GetHand());
-                //_player.
+                _player.AddToScore(_scoring.CreateScore(category, _roll.GetHand()));
+                _player.RemoveCategory(category);
             }
+            _io.PrintScore(_player);
             
-           
+            _io.PrintCategories((Dictionary<string, bool>) _player.ReturnCategories().ReturnCategories());
+        }
+
+        public bool AreCategoriesEmpty()
+        {
+            return _player.IsAllOutOfCategories();
+        }
+
+        public void PrintScores()
+        {
+            _io.PrintScore(_player);
         }
     }
 }

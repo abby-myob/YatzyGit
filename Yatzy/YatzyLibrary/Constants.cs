@@ -7,8 +7,8 @@ namespace YatzyLibrary
         public const string Welcome = "Welcome to Yatzy";
         public const string GetPlayerName = "Please enter a player name: ";
         
-        public const string RollAgainQuestion = "Would you like to roll again? (y/n) ";
-        public const string WhatDiceToRollAgain = "What dice would you like to roll? (eg yynyy) ";
+        public const string RollAgainQuestion = "Roll again? (y/n) ";
+        public const string WhatDiceToRollAgain = "What dice to roll? (eg yynyy) ";
 
         public const string ChooseCategory = "Please choose your category";
 
