@@ -7,6 +7,6 @@ namespace YatzyLibrary.Interfaces
         bool IsUsed(string input);
         void ChangeToUsed(string input);
         bool AreAllUsed();
-        IDictionary<string, bool> ReturnCategories();
+        Dictionary<string, bool> CategoryList { get; set; }
     }
 }

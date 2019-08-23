@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Moq;
 using Xunit;
 using YatzyLibrary;
 using YatzyLibrary.Interfaces;
@@ -32,14 +33,19 @@ namespace YatzyTests
             categories.ChangeToUsed(input);
             
             // Assert
-            Assert.True(categories.IsUsed(input));
+            Assert.True(categories.CategoryList[input]);
         }
 
         [Fact]
-        public void check_category_is_all_used()
+        public void check_categories_are_all_used()
         {
             // Arrange
-            var categories = new FakeCategories(new Dictionary<string, bool>());
+            var categories = new Categories(new Dictionary<string, bool>
+            {
+                {"chance", true},
+                {"yatzy", true},
+                {"ones", true}, 
+            });
 
             // Act 
             var allUsed = categories.AreAllUsed();
@@ -47,39 +53,44 @@ namespace YatzyTests
             // Assert
             Assert.True(allUsed);
         }
+        
+        [Fact]
+        public void check_categories_are_not_all_used_with_one_unsed_category()
+        {
+            // Arrange
+            var categories = new Categories(new Dictionary<string, bool>
+            {
+                {"chance", true},
+                {"yatzy", true},
+                {"ones", false}, 
+            });
+
+            // Act 
+            var allUsed = categories.AreAllUsed();
+            
+            // Assert
+            Assert.False(allUsed);
+        }
+        
+        [Fact]
+        public void check_category_status()
+        {
+            // Arrange
+            var categories = new Categories(new Dictionary<string, bool>
+            {
+                {"chance", true},
+                {"yatzy", true},
+                {"ones", false}, 
+            });
+
+            // Act  
+            
+            // Assert
+            Assert.True(categories.IsUsed("chance"));
+            Assert.True(categories.IsUsed("yatzy"));
+            Assert.False(categories.IsUsed("ones"));
+        }
 
         
-    }
-
-    public class FakeCategories : ICategories
-    {
-        private readonly Dictionary<string, bool> _categoryList;
-
-        public FakeCategories(Dictionary<string, bool> categoryList)
-        {
-            categoryList.Add("chance", true);
-            categoryList.Add("yatzy", true);
-
-            _categoryList = categoryList;
-        }
-        public bool IsUsed(string input)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void ChangeToUsed(string input)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool AreAllUsed()
-        {
-            foreach (var category in _categoryList)
-            {
-                if (category.Value == false) return false;
-            }
-
-            return true;
-        }
     }
 }

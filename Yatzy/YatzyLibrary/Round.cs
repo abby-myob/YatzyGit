@@ -43,10 +43,10 @@ namespace YatzyLibrary
             {
                 _player.AddToScore(_scoring.CreateScore(category, _roll.GetHand()));
                 _player.RemoveCategory(category);
-            }
+            } 
             _io.PrintScore(_player);
-            
-            _io.PrintCategories((Dictionary<string, bool>) _player.ReturnCategories().ReturnCategories());
+
+            _io.PrintCategories(_player.ReturnCategories().CategoryList);
         }
 
         public bool AreCategoriesEmpty()

@@ -1,38 +1,98 @@
 
 using System;
 using System.Collections.Generic;
+using Moq;
+using Moq.Language.Flow;
 using Xunit;
 using YatzyLibrary;
+using YatzyLibrary.Interfaces;
 
 namespace YatzyTests
 {
     public class RoundTests
     {
-        [Theory]
-        [InlineData(2)]
-        [InlineData(6)]
-        [InlineData(4)]
-        [InlineData(1)] 
-        public void Return_set_die(int expected)
+        private Mock<IPlayer> _playerMock;
+        private Mock<IRoll> _rollMock;
+        private Mock<IScoring> _scoringMock;
+        private Mock<IResponseThingy> _ioMock;
+        private Mock<ICategories> _categoriesMock;
+
+        public RoundTests()
         {
-            //Arrange
-            Round round = new Round(
-                new Player(
-                    new Categories(
-                        new Dictionary<string, bool>()), "ab", 0), 
-                new Roll(
-                    new Hand(
-                        new DieFactory())),
-                new Scoring(
-                    new CategoryLogic()), 
-                new ConsoleResponseThingy()
-                );
+            _playerMock = new Mock<IPlayer>();
+            _rollMock = new Mock<IRoll>();
+            _scoringMock = new Mock<IScoring>();
+            _ioMock = new Mock<IResponseThingy>();
+            _categoriesMock = new Mock<ICategories>();
+        }
+
+        [Fact]
+        public void ReRollOnlyTwice()
+        {
+            //Arrange 
+
+            _ioMock.Setup(io => io.RollAgainQuestion()).Returns(true);
+
+            var round = new Round(_playerMock.Object, _rollMock.Object, _scoringMock.Object, _ioMock.Object);
             
+
             //Act
-            //round.StartRound();
+            round.StartRolling(); 
+            //Assert 
+            _ioMock.Verify(io => io.RollAgainQuestion(), Times.Exactly(2));
+        }
+        
+        [Fact]
+        public void Category_been_used_false()
+        {
+            //Arrange 
+            var playerMock2 = new Mock<IPlayer>();
+            playerMock2.Setup(io => io.HasCategoryBeenUsed(It.IsAny<string>())).Returns(false);
+            playerMock2.Setup(p => p.ReturnCategories()).Returns(_categoriesMock.Object);
+
+            var round = new Round(playerMock2.Object, _rollMock.Object, _scoringMock.Object, _ioMock.Object);
+
+            //Act
+            round.Scoring(); 
             
-            //Assert
-            //Assert.Equal(expected, die.Value);
+            //Assert 
+            playerMock2.Verify(io => io.RemoveCategory(It.IsAny<string>()), Times.Once);
+        }
+        
+        [Fact]
+        public void Category_pair_return_false()
+        {
+            //Arrange 
+            var playerMock2 = new Mock<IPlayer>();
+            var ioMock2 = new Mock<IResponseThingy>();
+            ioMock2.Setup(io => io.ChooseCategory()).Returns("pair");
+            playerMock2.Setup(p => p.ReturnCategories()).Returns(_categoriesMock.Object);
+
+            var round = new Round(playerMock2.Object, _rollMock.Object, _scoringMock.Object, ioMock2.Object);
+
+            //Act
+            round.Scoring(); 
+            
+            //Assert 
+            playerMock2.Verify(io => io.RemoveCategory("pair"), Times.Once);
+        }
+        
+        [Fact]
+        public void Category_pair_return_faldse()
+        {
+            //Arrange 
+            var playerMock2 = new Mock<IPlayer>();
+            var ioMock2 = new Mock<IResponseThingy>();
+            ioMock2.Setup(io => io.ChooseCategory()).Returns("pair");
+            playerMock2.Setup(p => p.ReturnCategories()).Returns(_categoriesMock.Object);
+
+            var round = new Round(playerMock2.Object, _rollMock.Object, _scoringMock.Object, ioMock2.Object);
+
+            //Act
+            round.Scoring(); 
+            
+            //Assert 
+            playerMock2.Verify(io => io.RemoveCategory("pair"), Times.Once);
         }
     }
 }
