@@ -13,7 +13,12 @@ namespace YatzyTests
         public void check_category_is_used(string input)
         {
             // Arrange
-            var categories = new Categories(new Dictionary<string, bool>());
+            var categories = new Categories(new Dictionary<string, bool>
+            {
+                {input, false},
+                {"yatzy", true},
+                {"ones", false}, 
+            });
 
             // Act 
             var used = categories.IsUsed(input);

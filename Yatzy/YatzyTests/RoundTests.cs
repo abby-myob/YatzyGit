@@ -78,21 +78,65 @@ namespace YatzyTests
         }
         
         [Fact]
-        public void Category_pair_return_faldse()
+        public void Category_are_empty()
         {
             //Arrange 
-            var playerMock2 = new Mock<IPlayer>();
-            var ioMock2 = new Mock<IResponseThingy>();
-            ioMock2.Setup(io => io.ChooseCategory()).Returns("pair");
-            playerMock2.Setup(p => p.ReturnCategories()).Returns(_categoriesMock.Object);
+            var playerMock2 = new Mock<IPlayer>(); 
+            playerMock2.Setup(p => p.IsAllOutOfCategories()).Returns(false);
 
-            var round = new Round(playerMock2.Object, _rollMock.Object, _scoringMock.Object, ioMock2.Object);
+            var round = new Round(playerMock2.Object, _rollMock.Object, _scoringMock.Object, _ioMock.Object);
 
             //Act
-            round.Scoring(); 
+            var areEmpty = round.AreCategoriesEmpty(); 
             
             //Assert 
-            playerMock2.Verify(io => io.RemoveCategory("pair"), Times.Once);
+            Assert.False(areEmpty);
+        }
+        
+        [Fact]
+        public void PrintScores()
+        {
+            //Arrange  
+
+            var round = new Round(_playerMock.Object, _rollMock.Object, _scoringMock.Object, _ioMock.Object);
+
+            //Act
+            round.PrintScores(); 
+            
+            //Assert 
+            _ioMock.Verify(io => io.PrintScore(_playerMock.Object), Times.Once);
+        }
+        
+        [Fact]
+        public void StartRolling()
+        {
+            //Arrange  
+            var ioMock2 = new Mock<IResponseThingy>();
+            ioMock2.Setup(io => io.RollAgainQuestion()).Returns(true);
+            
+            var round = new Round(_playerMock.Object, _rollMock.Object, _scoringMock.Object, ioMock2.Object);
+
+            //Act
+            round.StartRolling(); 
+            
+            //Assert 
+            ioMock2.Verify(io => io.PrintDice(It.IsAny<int[]>()), Times.Exactly(3));
+        }
+        
+        [Fact]
+        public void StartRollingOnlyOnce()
+        {
+            //Arrange  
+            var ioMock2 = new Mock<IResponseThingy>();
+            ioMock2.Setup(io => io.RollAgainQuestion()).Returns(false);
+            
+            var round = new Round(_playerMock.Object, _rollMock.Object, _scoringMock.Object, ioMock2.Object);
+
+            //Act
+            round.StartRolling(); 
+            
+            //Assert 
+            ioMock2.Verify(io => io.PrintDice(It.IsAny<int[]>()), Times.Exactly(2));
         }
     }
 }

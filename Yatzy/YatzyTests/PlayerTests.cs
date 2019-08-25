@@ -56,13 +56,38 @@ namespace YatzyTests
         public void are_all_the_categories_dead()
         {
             // Arrange
-            var player = new Player(new FakeCategories(new Dictionary<string, bool>()), "abb", 0);
+            var categories = new Categories(new Dictionary<string, bool>
+            {
+                {"chance", true},
+                {"yatzy", true},
+                {"ones", true}, 
+            });
+            var player = new Player(categories, "abb", 0);
 
             // Act 
             bool allout = player.IsAllOutOfCategories();
             
             // Assert
             Assert.True(allout);
+        }
+        
+        [Fact] 
+        public void return_categories()
+        {
+            // Arrange
+            var categories = new Categories(new Dictionary<string, bool>
+            {
+                {"chance", true},
+                {"yatzy", true},
+                {"ones", true}, 
+            });
+            var player = new Player(categories, "abb", 0);
+
+            // Act 
+            var categoriesTest = player.ReturnCategories();
+            
+            // Assert
+            Assert.Equal(categoriesTest, categories);
         }
 
         

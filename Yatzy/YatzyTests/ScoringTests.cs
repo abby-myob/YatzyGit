@@ -143,6 +143,7 @@ namespace YatzyTests
         [InlineData("small straight", new[]{1,2,3,4,5}, 15)] 
         [InlineData("large straight", new[]{2,3,4,5,6}, 20)] 
         [InlineData("full house", new[]{1,1,2,2,2}, 8)] 
+        [InlineData("full ", new[]{1,1,2,2,2}, 0)] 
         public void check_scoring_stuff(string input, int[] hand, int expected)
         {
             // Arrange
