@@ -65,10 +65,10 @@ namespace YatzyTests
             var player = new Player(categories, "abb", 0);
 
             // Act 
-            bool allout = player.IsAllOutOfCategories();
+            bool allot = player.IsAllOutOfCategories();
             
             // Assert
-            Assert.True(allout);
+            Assert.True(allot);
         }
         
         [Fact] 

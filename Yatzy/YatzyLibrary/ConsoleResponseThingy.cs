@@ -26,8 +26,14 @@ namespace YatzyLibrary
             var output = new List<bool>();
             var input = Console.ReadLine();
 
-            if (input == null) return output.ToArray();
+            while (input != null && input.Length != 5)
+            {
+                Console.WriteLine(Constants.WhatDiceToRollAgain);
+                input = Console.ReadLine();
+            }
 
+            if (input == null) input = "nnnnn";
+            
             foreach (var die in input)
             {
                 output.Add(die == 'y');
@@ -36,16 +42,18 @@ namespace YatzyLibrary
             return output.ToArray();
         }
 
-        public string ChooseCategory()
+        public string ChooseCategory(IDictionary<string, bool> categories)
         {
             Console.WriteLine(Constants.ChooseCategory);
-            return Console.ReadLine();
-        }
+            var response = Console.ReadLine();
+            while (categories.All(x => x.Key != response))
+            {
+                Console.WriteLine(Constants.ChooseCategory);
+                response = Console.ReadLine();
+            }
 
-        public void PrintWelcome()
-        {
-            Console.WriteLine(Constants.Welcome);
-        }
+            return response;
+        } 
 
         public void PrintDice(int[] dice)
         {
@@ -66,11 +74,11 @@ namespace YatzyLibrary
         public void RollsToGo(int rolls)
         {
             Console.WriteLine(rolls == 0 ? Constants.NoRollsLeft : Constants.OneRollLeft);
-        }
-
-
+        } 
+        
         public void PrintCategories(IDictionary<string, bool> categories)
         {
+            Console.Write(Constants.Categories);
             foreach (var (key, value) in categories)
             {
                 if (value == false)
@@ -83,4 +91,3 @@ namespace YatzyLibrary
         }
     }
 }
-

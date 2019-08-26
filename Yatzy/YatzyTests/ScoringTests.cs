@@ -12,7 +12,7 @@ namespace YatzyTests
         [InlineData(new[] {5, 1, 5, 7, 1}, 19)]
         public void Return_score_for_chance(int[] dice, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.Chance(dice));
         }
@@ -26,7 +26,7 @@ namespace YatzyTests
         [InlineData(new[] {5, 5, 5, 5, 5}, 50)]
         public void Return_score_for_Yatzy(int[] dice, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.Yatzy(dice));
         }
@@ -44,7 +44,7 @@ namespace YatzyTests
         [InlineData(new[] {5, 5, 5, 3, 5}, 1, 0)]
         public void Return_score_for_Ones(int[] dice, int num, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.SumNumber(dice, num));
         }
@@ -56,7 +56,7 @@ namespace YatzyTests
         [InlineData(new[] {3, 3, 3, 3, 1}, 6)]
         public void Return_score_for_Pair(int[] dice, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.NumberOfAKind(dice, 2));
         }
@@ -67,7 +67,7 @@ namespace YatzyTests
         [InlineData(new[] {1, 1, 2, 2, 2}, 6)]
         public void Return_score_for_Two_Pair(int[] dice, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.TwoPair(dice));
         }
@@ -79,7 +79,7 @@ namespace YatzyTests
         [InlineData(new[] {1, 2, 2, 2, 2}, 6)]
         public void Return_score_for_3ofAKind(int[] dice, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.NumberOfAKind(dice, 3));
         }
@@ -91,7 +91,7 @@ namespace YatzyTests
         [InlineData(new[] {3, 3, 3, 3, 1}, 12)]
         public void Return_score_for_4ofAKind(int[] dice, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.NumberOfAKind(dice, 4));
         }
@@ -102,7 +102,7 @@ namespace YatzyTests
         [InlineData(new[] {5, 6, 2, 4, 3}, 20)]
         public void return_score_for_straight(int[] dice, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.Straight(dice));
         }
@@ -114,7 +114,7 @@ namespace YatzyTests
         [InlineData(new[] {5, 5, 4, 4, 4}, 22)]
         public void return_score_for_Full_House(int[] dice, int expected)
         {
-            CategoryLogic categoryLogic = new CategoryLogic();
+            var categoryLogic = new CategoryLogic();
 
             Assert.Equal(expected, categoryLogic.FullHouse(dice));
         }
@@ -147,11 +147,11 @@ namespace YatzyTests
         public void check_scoring_stuff(string input, int[] hand, int expected)
         {
             // Arrange
-            CategoryLogic categoryLogic = new CategoryLogic();
-            Scoring scoring = new Scoring(categoryLogic);
+            var categoryLogic = new CategoryLogic();
+            var scoring = new Scoring(categoryLogic);
             
             // Act
-            int score = scoring.CreateScore(input, hand);
+            var score = scoring.CreateScore(input, hand);
 
             // Assert
             Assert.Equal(expected, score);

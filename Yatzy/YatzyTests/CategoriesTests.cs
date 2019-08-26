@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using Moq;
 using Xunit;
 using YatzyLibrary;
-using YatzyLibrary.Interfaces;
 
 namespace YatzyTests
 {
@@ -60,7 +58,7 @@ namespace YatzyTests
         }
         
         [Fact]
-        public void check_categories_are_not_all_used_with_one_unsed_category()
+        public void check_categories_are_not_all_used_with_one_unused_category()
         {
             // Arrange
             var categories = new Categories(new Dictionary<string, bool>

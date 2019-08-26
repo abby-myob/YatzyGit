@@ -8,8 +8,7 @@ namespace YatzyLibrary.Interfaces
         string GetPlayerName();
         Boolean RollAgainQuestion();
         bool[] WhatDiceToRollAgain();
-        string ChooseCategory();
-        void PrintWelcome();
+        string ChooseCategory(IDictionary<string, bool> categories); 
         void PrintDice(int[] dice);
         void PrintScore(IPlayer player);
         void RollsToGo(int rolls);

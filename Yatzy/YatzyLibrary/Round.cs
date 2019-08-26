@@ -32,21 +32,21 @@ namespace YatzyLibrary
 
                 _roll.RollSome(_io.WhatDiceToRollAgain());
                 _io.PrintDice(_roll.GetHand());
-
+                _io.RollsToGo(1-i); 
             }
         }
 
         public void Scoring()
         {
-            var category = _io.ChooseCategory();
+            _io.PrintCategories(_player.ReturnCategories().CategoryList);
+            var category = _io.ChooseCategory(_player.ReturnCategories().CategoryList);
+            
             if(_player.HasCategoryBeenUsed(category) == false)
             {
                 _player.AddToScore(_scoring.CreateScore(category, _roll.GetHand()));
                 _player.RemoveCategory(category);
             } 
             _io.PrintScore(_player);
-
-            _io.PrintCategories(_player.ReturnCategories().CategoryList);
         }
 
         public bool AreCategoriesEmpty()

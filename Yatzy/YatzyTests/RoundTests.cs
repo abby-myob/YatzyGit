@@ -1,8 +1,4 @@
-
-using System;
-using System.Collections.Generic;
 using Moq;
-using Moq.Language.Flow;
 using Xunit;
 using YatzyLibrary;
 using YatzyLibrary.Interfaces;
@@ -11,11 +7,11 @@ namespace YatzyTests
 {
     public class RoundTests
     {
-        private Mock<IPlayer> _playerMock;
-        private Mock<IRoll> _rollMock;
-        private Mock<IScoring> _scoringMock;
-        private Mock<IResponseThingy> _ioMock;
-        private Mock<ICategories> _categoriesMock;
+        private readonly Mock<IPlayer> _playerMock;
+        private readonly Mock<IRoll> _rollMock;
+        private readonly Mock<IScoring> _scoringMock;
+        private readonly Mock<IResponseThingy> _ioMock;
+        private readonly Mock<ICategories> _categoriesMock;
 
         public RoundTests()
         {
@@ -29,12 +25,9 @@ namespace YatzyTests
         [Fact]
         public void ReRollOnlyTwice()
         {
-            //Arrange 
-
+            //Arrange  
             _ioMock.Setup(io => io.RollAgainQuestion()).Returns(true);
-
             var round = new Round(_playerMock.Object, _rollMock.Object, _scoringMock.Object, _ioMock.Object);
-            
 
             //Act
             round.StartRolling(); 
@@ -65,7 +58,7 @@ namespace YatzyTests
             //Arrange 
             var playerMock2 = new Mock<IPlayer>();
             var ioMock2 = new Mock<IResponseThingy>();
-            ioMock2.Setup(io => io.ChooseCategory()).Returns("pair");
+            ioMock2.Setup(io => io.ChooseCategory(_categoriesMock.Object.CategoryList)).Returns("pair");
             playerMock2.Setup(p => p.ReturnCategories()).Returns(_categoriesMock.Object);
 
             var round = new Round(playerMock2.Object, _rollMock.Object, _scoringMock.Object, ioMock2.Object);

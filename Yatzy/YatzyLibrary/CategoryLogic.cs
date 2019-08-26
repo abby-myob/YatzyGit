@@ -60,7 +60,7 @@ namespace YatzyLibrary
         {
             Array.Sort(dice);
 
-            for (int i = 0; i < dice.Length - 1; i++)
+            for (var i = 0; i < dice.Length - 1; i++)
             {
                 if (dice[i + 1] - dice[i] != 1) return 0;
             }

@@ -2,11 +2,6 @@ using YatzyLibrary.Interfaces;
 
 namespace YatzyLibrary
 {
-    public interface IGame
-    {
-        void Play();
-    }
-
     public class Game : IGame
     {
         private readonly IRound _round;

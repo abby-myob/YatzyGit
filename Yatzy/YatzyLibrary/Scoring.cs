@@ -14,7 +14,7 @@ namespace YatzyLibrary
         public int CreateScore(string category, int[] hand)
         {
             switch (category)
-            {  
+            {
                 case "ones":
                     return _categoryLogic.SumNumber(hand, 1);
                 case "twos":
@@ -27,12 +27,10 @@ namespace YatzyLibrary
                     return _categoryLogic.SumNumber(hand, 5);
                 case "sixes":
                     return _categoryLogic.SumNumber(hand, 6);
-
                 case "chance":
                     return _categoryLogic.Chance(hand);
                 case "yatzy":
                     return _categoryLogic.Yatzy(hand);
-                
                 case "pair":
                     return _categoryLogic.NumberOfAKind(hand, 2);
                 case "two pair":
@@ -41,16 +39,15 @@ namespace YatzyLibrary
                     return _categoryLogic.NumberOfAKind(hand, 3);
                 case "four of a kind":
                     return _categoryLogic.NumberOfAKind(hand, 4);
-                
                 case "small straight":
                     return _categoryLogic.Straight(hand);
                 case "large straight":
                     return _categoryLogic.Straight(hand);
                 case "full house":
                     return _categoryLogic.FullHouse(hand);
+                default:
+                    return 0;
             }
-
-            return 0;
         } 
     }
 }
